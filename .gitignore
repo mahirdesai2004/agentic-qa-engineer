@@ -1,3 +1,6 @@
 .env
 __pycache__/
 screenshots/
+.DS_Store
+.python-version
+check_models.py
