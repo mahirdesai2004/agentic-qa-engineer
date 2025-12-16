@@ -1,7 +1,8 @@
 import streamlit as st
 from ai_agent import generate_test_steps, explain_failure
 from selenium_runner import run_test
-from evaluation_layer import evaluate
+from evaluation_layer import evaluate, validate_steps
+from notifier import notify_user
 
 st.title("Agentic AI QA Engineer")
 
@@ -20,6 +21,12 @@ if st.button("Run AI QA Test"):
     st.subheader("Generated Test Steps")
     st.json(steps)
 
+    is_valid, msg = validate_steps(steps)
+    if not is_valid:
+        st.error(f"AI output validation failed: {msg}")
+        notify_user(f"AI output validation failed: {msg}")
+        st.stop()
+
     result, reason = run_test(steps, test_url)
     st.subheader("Test Result")
     st.write(result)
@@ -31,3 +38,5 @@ if st.button("Run AI QA Test"):
     else:
         detailed_explanation = explain_failure(requirement, steps, reason)
         st.write(detailed_explanation)
+
+    notify_user(f"Test completed with status: {result}")
