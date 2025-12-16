@@ -29,7 +29,7 @@ streamlit run app.py
 
 | PASS | FAIL |
 |------|------|
-| ![Pass](screenshots/pass/test_20251216_234647.png) | ![Fail](screenshots/fail/test_20251216_235115.png) |
+| ![Pass](screenshots/pass/test_20251216_234647.png) | ![Fail](screenshots/fail/test_20251216_234909.png) |
 
 ## 🛠️ Tech Stack
 
