@@ -1,5 +1,5 @@
 import streamlit as st
-from ai_agent import generate_test_steps
+from ai_agent import generate_test_steps, explain_failure
 from selenium_runner import run_test
 from evaluation_layer import evaluate
 
@@ -24,6 +24,10 @@ if st.button("Run AI QA Test"):
     st.subheader("Test Result")
     st.write(result)
 
-    explanation = evaluate(result, reason)
     st.subheader("AI Explanation")
-    st.write(explanation)
+
+    if result == "PASS":
+        st.write(evaluate(result, reason))
+    else:
+        detailed_explanation = explain_failure(requirement, steps, reason)
+        st.write(detailed_explanation)

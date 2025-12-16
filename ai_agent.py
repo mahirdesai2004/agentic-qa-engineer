@@ -56,3 +56,34 @@ Expected JSON format:
         return json.loads(text)
     except json.JSONDecodeError:
         raise ValueError(f"Invalid JSON returned by Gemini:\n{text}")
+    
+def explain_failure(requirement: str, steps, failure_reason: str):
+    """
+    Explains why a test failed and suggests a possible fix.
+    Called ONLY when Selenium test fails.
+    """
+
+    prompt = f"""
+You are a senior QA engineer.
+
+Requirement:
+"{requirement}"
+
+Test steps executed:
+{steps}
+
+Observed failure:
+"{failure_reason}"
+
+Tasks:
+1. Explain in simple terms why this behavior is incorrect.
+2. Suggest a likely fix (frontend or backend).
+
+Rules:
+- Be concise
+- No code blocks
+- No markdown
+"""
+
+    response = model.generate_content(prompt)
+    return response.text.strip()
