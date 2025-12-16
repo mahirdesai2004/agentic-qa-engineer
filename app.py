@@ -27,7 +27,7 @@ if st.button("Run AI QA Test"):
         notify_user(f"AI output validation failed: {msg}")
         st.stop()
 
-    result, reason = run_test(steps, test_url)
+    result, reason, screenshot_path = run_test(steps, test_url)
     st.subheader("Test Result")
     st.write(result)
 
@@ -38,5 +38,10 @@ if st.button("Run AI QA Test"):
     else:
         detailed_explanation = explain_failure(requirement, steps, reason)
         st.write(detailed_explanation)
+
+    if screenshot_path:
+        st.subheader("Failure Screenshot")
+        st.image(screenshot_path)
+        notify_user(f"Screenshot captured at {screenshot_path}")
 
     notify_user(f"Test completed with status: {result}")
