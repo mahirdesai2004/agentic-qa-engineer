@@ -2,3 +2,5 @@ streamlit
 selenium
 google-generativeai
 python-dotenv
+requests
+beautifulsoup4

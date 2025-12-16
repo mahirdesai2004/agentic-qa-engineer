@@ -1,4 +1,4 @@
-ALLOWED_ACTIONS = {"navigate", "input", "click", "check"}
+ALLOWED_ACTIONS = {"navigate", "input", "click", "check", "wait"}
 
 def validate_steps(steps):
     """

@@ -17,7 +17,8 @@ test_url = st.text_input(
 )
 
 if st.button("Run AI QA Test"):
-    steps = generate_test_steps(requirement)
+    with st.spinner("🔍 Analyzing page and generating test steps..."):
+        steps = generate_test_steps(requirement, test_url)
     st.subheader("Generated Test Steps")
     st.json(steps)
 
@@ -40,7 +41,7 @@ if st.button("Run AI QA Test"):
         st.write(detailed_explanation)
 
     if screenshot_path:
-        st.subheader("Failure Screenshot")
+        st.subheader("📸 Test Screenshot")
         st.image(screenshot_path)
         notify_user(f"Screenshot captured at {screenshot_path}")
 
